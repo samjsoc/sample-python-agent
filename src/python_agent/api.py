@@ -93,7 +93,7 @@ let sessionId=null;
 const log=document.getElementById('log'),input=document.getElementById('message'),send=document.getElementById('send');
 function append(who,msg){let div=document.createElement('div');div.className='entry';let heading=document.createElement('div');heading.className='who';heading.textContent=who;let content=document.createElement('div');content.textContent=msg;div.append(heading,content);log.append(div);log.scrollTop=log.scrollHeight;}
 document.getElementById('form').addEventListener('submit',async e=>{e.preventDefault();const msg=input.value.trim();if(!msg)return;append('You',msg);input.value='';send.disabled=true;
-try{let r=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,session_id:sessionId})});let data=await r.json();if(!r.ok)throw Error(data.detail||'Request failed');sessionId=data.session_id;append('Agent',data.response);}catch(err){append('Error',err.message)}finally{send.disabled=false;input.focus()}});
+try{let r=await fetch(`${basePath}/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,session_id:sessionId})});let data=await r.json();if(!r.ok)throw Error(data.detail||'Request failed');sessionId=data.session_id;append('Agent',data.response);}catch(err){append('Error',err.message)}finally{send.disabled=false;input.focus()}});
 document.getElementById('new').addEventListener('click',async()=>{if(sessionId){await fetch('/sessions/'+sessionId,{method:'DELETE'}).catch(()=>{});}sessionId=null;log.replaceChildren();input.focus()});
 </script></body></html>'''
 
