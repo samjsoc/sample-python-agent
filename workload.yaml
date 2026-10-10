@@ -1,0 +1,22 @@
+apiVersion: openchoreo.dev/v1alpha1
+
+metadata:
+  name: task-agent
+
+endpoints:
+  - name: rest-api
+    port: 800
+    type: HTTP
+    visibility: 
+      - external
+
+configurations:
+  env:
+    - name: OLLAMA_MODEL
+      value: "qwen3.6:35b"
+    - name: OLLAMA_BASE_URL
+      value: "http://192.168.5.2:11434/v1"
+    - name: TASK_TIMEZONE
+      value: "America/Los_Angeles"
+    - name: TASK_DB
+      value: "/data/tasks.db"
