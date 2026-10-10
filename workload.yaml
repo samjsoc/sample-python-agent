@@ -5,7 +5,7 @@ metadata:
 
 endpoints:
   - name: rest-api
-    port: 800
+    port: 8000
     type: HTTP
     visibility: 
       - external
